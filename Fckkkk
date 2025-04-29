@@ -1,0 +1,63 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Lastname_ActivityGUI extends JFrame implements ActionListener {
+    private JTextField answerField;
+    private JLabel resultLabel;
+    private final String correctAnswer = "B"; // Correct answer is B
+
+    public Lastname_ActivityGUI() {
+        setTitle("Java Quiz");
+        setSize(500, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // center the window
+
+        // Main panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(7, 1, 10, 10)); // 7 rows, 1 column
+
+        // Question
+        JLabel questionLabel = new JLabel("What is the default value of a boolean in Java?");
+        panel.add(questionLabel);
+
+        // Choices
+        panel.add(new JLabel("A. true"));
+        panel.add(new JLabel("B. false"));
+        panel.add(new JLabel("C. 0"));
+        panel.add(new JLabel("D. null"));
+
+        // Input field
+        answerField = new JTextField();
+        panel.add(answerField);
+
+        // Submit button
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(this);
+        panel.add(submitButton);
+
+        // Result label
+        resultLabel = new JLabel("", SwingConstants.CENTER);
+        panel.add(resultLabel);
+
+        // Add panel to frame
+        add(panel);
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String userAnswer = answerField.getText().trim().toUpperCase(); // removes spaces and makes uppercase
+
+        if (userAnswer.equals(correctAnswer)) {
+            resultLabel.setText("Correct!");
+        } else {
+            resultLabel.setText("Wrong, the correct answer is B.");
+        }
+    }
+
+    public static void main(String[] args) {
+        new Lastname_ActivityGUI();
+    }
+}
